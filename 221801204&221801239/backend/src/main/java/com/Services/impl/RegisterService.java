@@ -17,18 +17,12 @@ public class RegisterService implements IRegisterService
     @Override
     public int Register(String username, String password)
     {
-        List<User> userList;
-        userList=registerMapper.getUserByName(username);
-        if (userList !=null)
+        int userNum = registerMapper.getUserByName(username);
+        if (userNum != 0 )//数据库内已经存在
         {
-            return -1;//注册失败
+            return -1;
         }
-
-        /* else
-        {
-           registerMapper.addUser(username,password);
-           return 1;//注册成功
-        } */
-        return 0;
+        else registerMapper.addUser(username,password);
+        return 1;
     }
 }

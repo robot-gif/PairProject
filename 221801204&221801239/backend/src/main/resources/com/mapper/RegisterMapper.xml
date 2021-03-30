@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.RegisterMapper">
-    <select id = "getUserByName" parameterType = "string" resultType = "User">
-        select * from xjbs.user where username = #{username};
+    <select id = "getUserByName" parameterType = "string" resultType = "_int">
+        select count(*) from xjbs.user where username = #{username};
     </select>
 
     <insert id = "addUser" parameterType = "User">

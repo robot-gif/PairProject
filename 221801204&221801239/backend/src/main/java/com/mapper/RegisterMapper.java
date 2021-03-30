@@ -11,5 +11,5 @@ import java.util.List;
 public interface RegisterMapper
 {
     void addUser(String username,String password);
-    List<User> getUserByName(String name);
+    int getUserByName(String name);
 }
