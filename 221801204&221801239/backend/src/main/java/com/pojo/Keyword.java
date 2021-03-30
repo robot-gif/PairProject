@@ -5,22 +5,19 @@ import org.apache.ibatis.type.Alias;
 @Alias("Keyword")
 public class Keyword
 {
-    private String keyword;
-    private int count;
+    private String name;//keyword
+    private int value;//value
 
-    public Keyword(String keyword, int count) {
-        this.keyword = keyword;
-        this.count = count;
-    }
-
-    public Keyword() {
+    public Keyword(String name, int value) {
+        this.name = name;
+        this.value = value;
     }
 
     @Override
     public String toString() {
         return "Keyword{" +
-                "keyword='" + keyword + '\'' +
-                ", count=" + count +
+                "name='" + name + '\'' +
+                ", value=" + value +
                 '}';
     }
 }

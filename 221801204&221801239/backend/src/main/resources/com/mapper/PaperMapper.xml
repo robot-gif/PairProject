@@ -6,4 +6,8 @@
 <select id="getTopWords" resultType="Keyword">
     select keyword,count from xjbs.keyword_count ORDER BY count DESC limit 0,10;
 </select>
+
+    <select id="getPapers" resultType="Paper">
+
+    </select>
 </mapper>
