@@ -4,27 +4,27 @@
         <h1 id="title">{{ itemObj.title }}</h1>
       <div id="cen">
         关键词:
-<!--        <div-->
-<!--          class="spr"-->
-<!--          style="display: inline"-->
-<!--          v-for="item in itemObj.spArr"-->
-<!--          :key="item"-->
-<!--        >-->
-<!--          {{ item }}-->
-<!--        </div>-->
+        <div
+          class="spr"
+          style="display: inline"
+          v-for="item in itemObj.keyword"
+          :key="item.index"
+        >
+          {{ item }}
+        </div>
       </div>
-      <p class="cont">{{ itemObj.content.substring(0,400) }}...</p>
+      <p class="cont">{{ itemObj.abstracted }}...</p>
       <div id="alink">
         原文链接:<a href="itemObj.link">{{ itemObj.link }}</a>
       </div>
     </div>
 <div id="right">
-  <div class="number">编号:{{ itemObj.id }}</div>
+  <div class="number">编号:{{ itemObj.paper_id }}</div>
   <div id="ope">
     <button class="look" @click="viewArt()">查看</button>
     <button class="del" @click="delArt()">删除</button>
   </div>
-  <div id="time">{{ itemObj.time }}</div>
+  <div id="time">{{ itemObj.publication_year }}</div>
 </div>
 
 
@@ -51,8 +51,9 @@ export default {
       });
     },
     delArt(){
-      bus.$emit('delete', this.itemObj.id);
-
+      this.$nextTick(()=>{
+      bus.$emit('delete', this.itemObj.paper_id);
+      });
     }
 
   },created() {

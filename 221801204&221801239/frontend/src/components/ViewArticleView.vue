@@ -3,23 +3,23 @@
     <div id="view">
       <div id="top">
         <h1>标题:{{ itemObj.title }}</h1>
-        <div id="number">编号:{{ itemObj.id }}</div>
+        <div id="number">编号:{{ itemObj.paper_id }}</div>
       </div>
       <div id="center">
         关键词:
-<!--        <div-->
-<!--          class="spr"-->
-<!--          style="display: inline"-->
-<!--          v-for="item in this.itemObj.spArr"-->
-<!--          :key="item"-->
-<!--        >-->
-<!--          {{ item }}-->
-<!--        </div>-->
-        <p id="cont">{{ itemObj.content}}</p>
+        <div
+          class="spr"
+          style="display: inline"
+          v-for="item in this.itemObj.keyword"
+          :key="item"
+        >
+          {{ item }}
+        </div>
+        <p id="cont">{{ itemObj.abstracted}}</p>
       </div>
 
       <div id="bottom">
-        <div id="time">发表时间:{{ itemObj.time }}</div>
+        <div id="time">发表时间:{{ itemObj.publication_year }}</div>
         <div id="alink">
           原文链接:<a href="itemObj.link">{{ itemObj.link }}</a>
         </div>
@@ -107,9 +107,7 @@ background-color: white;
     background-color: #02a7f0;
   }
 }
-
     }
-
 
 }
 
