@@ -9,11 +9,11 @@
         </div>
         <div id="lform">
           <label class="lab">账号</label>
-          <el-input v-model="user.username" placeholder="请输入账号"></el-input>
+          <el-input v-model="username" placeholder="请输入账号"></el-input>
           <label class="lab">密码</label>
           <el-input
             type="password"
-            v-model="user.password"
+            v-model="password"
             placeholder="请输入密码"
             @keydown.enter.native="doLogin"
           ></el-input>
@@ -38,10 +38,8 @@ import IntroView from "@/components/IntroView";
 export default {
   data() {
     return {
-      user: {
         username: "",
         password: "",
-      },
       state:{
         status:0,
         index:0
@@ -51,27 +49,27 @@ export default {
   },
   methods: {
     doLogin() {
-      // this.$http
-      //   .post('http://localhost:8081//test', {
-      //     username: this.user.username,
-      //     password: this.user.password
-      //   })
-      //   .then(successResponse => {
-      //     console.log(successResponse)
-      //     if (successResponse.data.code === 200) {
-      //       // var data = this.loginForm
-      //       this.status=1;
-      //       this.$nextTick(()=>{
-      //         bus.$emit('sendStatus', this.status);
-      //       });
-      //       this.$router.replace({path: '/Search'})
-      //     }
-      //   })
-      //   .catch(failResponse => {
-      //   })
-      this.state.status=1;
-      this.state.index=1;
-      this.$router.replace({path: '/Search'})
+      this.$axios.get('http://localhost:8083/login', {
+        params: {
+          username: this.username,
+          password: this.password
+        }
+      }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded format' } })
+        .then(res => {
+          console.log(res)
+          if (res.data===1) {
+            this.state.status=1;
+            this.state.index=1;
+            this.$nextTick(()=>{
+              bus.$emit('sendStatus', this.status);
+            });
+            this.$router.replace({path: '/Search'})
+          }else if(res.data===-1){
+            alert("用户未注册，请注册后再登录")
+          }
+        })
+        .catch(failResponse => {
+        })
     },
     doRegister() {
       this.$router.replace("/register");

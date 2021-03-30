@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import bus from "@/assets/eventBus";
+
 export default {
   data() {
     const validateUser = (rule, value, callback) => {
@@ -98,9 +100,24 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$message.success("注册成功")
+          this.$axios
+            .get('http://localhost:8083/register', {
+              params:{
+                username: this.ruleForm.user,
+                password: this.ruleForm.pass
+              }
+            },{ headers: { 'Content-Type': 'application/x-www-form-urlencoded format' } })
+            .then(res => {
+                if(res.data===1){
+                  this.$message.success("注册成功")
+                  this.$router.replace({path: '/Login'})
+                }else{
+                  this.$message.error("注册失败，用户名已被注册！")
+                }
 
-          this.$router.push('/login')
+            }).catch(failResponse => {
+          })
+
         } else {
           this.$message.error("信息填写有误！请重新填写")
           return false;
