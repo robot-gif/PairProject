@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fb1c53b-369a-4440-89f4-ade60ff18e63" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/17fb11bd-c3ca-4458-9116-1781aef3fd8f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/17fb11bd-c3ca-4458-9116-1781aef3fd8f.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Controllers/PaperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Controllers/PaperController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Services/IPaperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Services/IPaperService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Services/impl/PaperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Services/impl/PaperService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/Controllers/PaperController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Controllers/PaperController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/Services/IPaperService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Services/IPaperService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mapper/PaperMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mapper/PaperMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pojo/Paper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pojo/Paper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/mapper/PaperMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/mapper/PaperMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/Services/impl/PaperService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Services/impl/PaperService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/mapper/PaperMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/mapper/PaperMapper.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,13 +65,15 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.PairworkApplication (1)">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -133,7 +137,8 @@
       <workItem from="1617116279032" duration="8625000" />
       <workItem from="1617126341785" duration="111000" />
       <workItem from="1617126586244" duration="380000" />
-      <workItem from="1617126994099" duration="22180000" />
+      <workItem from="1617126994099" duration="25784000" />
+      <workItem from="1617186693191" duration="2115000" />
     </task>
     <task id="LOCAL-00001" summary="完成论文列表接口除SQL部分的内容，修改了Keyword实体类">
       <created>1617131895033</created>

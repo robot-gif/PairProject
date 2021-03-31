@@ -1040,26 +1040,30 @@ APPLICATION_PASSWORD_ADMIN,AUDIT_ADMIN,BACKUP_ADMIN,BINLOG_ADMIN,BINLOG_ENCRYPTI
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="317" parent="293" name="abstract">
+    <column id="317" parent="293" name="abstracted">
       <Position>6</Position>
       <DataType>text|0s</DataType>
     </column>
-    <key id="318" parent="293" name="PRIMARY">
+    <column id="318" parent="293" name="keywords">
+      <Position>7</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <key id="319" parent="293" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>paper_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="319" parent="294" name="username">
+    <column id="320" parent="294" name="username">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Collation>utf8_general_ci</Collation>
     </column>
-    <column id="320" parent="294" name="password">
+    <column id="321" parent="294" name="password">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="321" parent="294" name="PRIMARY">
+    <key id="322" parent="294" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>

@@ -13,20 +13,21 @@ public class Paper
     private String link;
     private int publication_year;
     private String abstracted;
-    private transient List<KeywordForPapers> keywords;
+   // private transient List<KeywordForPapers> keywords;
     private String magazine;
-    private String[] keywordString;
+    private String keywords;
 
     public Paper() {
     }
 
-    public Paper(int paper_id, String title, String link, int publication_year, String abstracted, String magazine) {
+    public Paper(int paper_id, String title, String link, int publication_year, String abstracted, String magazine,String keywordString) {
         this.paper_id = paper_id;
         this.title = title;
         this.link = link;
         this.publication_year = publication_year;
         this.abstracted = abstracted;
         this.magazine = magazine;
+        this.keywords = keywordString;
     }
 
     @Override
@@ -38,7 +39,7 @@ public class Paper
                 ", publication_year=" + publication_year +
                 ", abstracted='" + abstracted + '\'' +
                 ", magazine='" + magazine + '\'' +
-                ", keywordString=" + Arrays.toString(keywordString) +
+                ", keywordString=" + keywords +
                 '}';
     }
 
@@ -82,13 +83,9 @@ public class Paper
         this.abstracted = abstracted;
     }
 
-    public List<KeywordForPapers> getKeywords() {
+    /* public List<KeywordForPapers> getKeywords() {
         return keywords;
-    }
-
-    public void setKeywords(List<KeywordForPapers> keywords) {
-        this.keywords = keywords;
-    }
+    } */
 
     public String getMagazine() {
         return magazine;
@@ -98,12 +95,8 @@ public class Paper
         this.magazine = magazine;
     }
 
-    public void setKeywordString()
+    public void setKeywordString(String keywords)
     {
-        this.keywordString=new String[this.keywords.size()];
-        for (int i=0;i<keywordString.length;i++)
-        {
-            keywordString[i]=keywords.get(i).getKeyword();
-        }
+        this.keywords=keywords;
     }
 }

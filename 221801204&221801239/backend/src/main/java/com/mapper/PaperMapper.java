@@ -13,6 +13,6 @@ import java.util.List;
 public interface PaperMapper
 {
     List<Keyword> getTopWords();
-    Paper getPapers(int paper_id);
-    List<KeywordForPapers> getKeyWords(int paper_id);
+    List<Paper> getPapers();
+
 }

@@ -19,17 +19,6 @@ public class PaperService implements IPaperService
     @Override
     public List<Paper> getPapers()
     {
-        List<Paper> paperList = new ArrayList<>();
-        List<KeywordForPapers> paperKeywords;
-        Paper paper;
-        for (int i=15000;i<=15003;i++)
-        {
-            paperKeywords = mapper.getKeyWords(i);//获取该篇文章的关键词列表
-            paper = mapper.getPapers(i);
-            paper.setKeywords(paperKeywords);
-            paper.setKeywordString();
-            paperList.add(paper);
-        }
-        return paperList;
+        return mapper.getPapers();
     }
 }
