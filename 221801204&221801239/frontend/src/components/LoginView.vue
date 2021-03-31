@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main">
-      <IntroView />
+      <IntroView/>
 
       <div id="login">
         <div id="head">
@@ -18,12 +18,14 @@
             @keydown.enter.native="doLogin"
           ></el-input>
           <el-button style="width: 270px" type="primary" @click="doLogin"
-            >登录</el-button
+          >登录
+          </el-button
           >
           <div id="bm">
             <label id="lb">还没有账号？</label>
-            <el-button  type="primary" @click="doRegister"
-              >立即注册</el-button
+            <el-button type="primary" @click="doRegister"
+            >立即注册
+            </el-button
             >
           </div>
         </div>
@@ -35,14 +37,15 @@
 <script>
 import bus from '@/assets/eventBus';
 import IntroView from "@/components/IntroView";
+
 export default {
   data() {
     return {
-        username: "",
-        password: "",
-      state:{
-        status:0,
-        index:0
+      username: "",
+      password: "",
+      state: {
+        status: 0,
+        index: 0
       }
 
     };
@@ -54,17 +57,15 @@ export default {
           username: this.username,
           password: this.password
         }
-      }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded format' } })
+      }, {headers: {'Content-Type': 'application/x-www-form-urlencoded format'}})
         .then(res => {
-          console.log(res)
-          if (res.data===1) {
-            this.state.status=1;
-            this.state.index=1;
-            this.$nextTick(()=>{
-              bus.$emit('sendStatus', this.status);
-            });
-            this.$router.replace({path: '/Search'})
-          }else if(res.data===-1){
+          if (res.data === 1) {
+            this.state.status = 1;
+            this.state.index = 1;
+
+            bus.$emit('sendStatus', this.state);
+            this.$router.replace('/Search');
+          } else if (res.data === -1) {
             alert("用户未注册，请注册后再登录")
           }
         })
@@ -74,10 +75,10 @@ export default {
     doRegister() {
       this.$router.replace("/register");
     },
-  },mounted(){
-      bus.$emit('sendStatus', this.state);
+  }, mounted() {
+    bus.$emit('sendStatus', this.state);
   },
-  components:{
+  components: {
     IntroView
   }
 };
@@ -89,6 +90,7 @@ export default {
   background: rgba(53, 64, 68, 1);
   position: fixed;
 }
+
 #login {
   height: 592px;
   width: 446px;
@@ -97,9 +99,11 @@ export default {
   margin-top: 50px;
   float: left;
 }
+
 #head {
   height: 100px;
   width: 446px;
+
   #bt {
     height: 30px;
     width: 120px;
@@ -111,9 +115,11 @@ export default {
     margin-top: 30px;
   }
 }
+
 #lform {
   height: 392px;
   width: 446px;
+
   .lab {
     font-size: 20px;
     font-weight: bold;
@@ -123,6 +129,7 @@ export default {
     margin-top: 20px;
     display: block;
   }
+
   .el-input {
     font-size: 16px;
     margin-top: 10px;
@@ -141,9 +148,11 @@ export default {
     display: block;
   }
 }
+
 #bm {
   font-size: 18px;
   margin-top: 160px;
+
   #lb {
     font-size: 20px;
     margin-top: 10px;
@@ -151,10 +160,10 @@ export default {
     margin-left: 110px;
     float: left;
   }
+
   .el-button {
     background-color: #233b47;
     color: #02a7f0;
-    display: line;
     font-weight: lighter;
     border: none;
     text-decoration: underline;

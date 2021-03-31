@@ -6,16 +6,15 @@
           <div style="color: #000; font-size: 18px">{{ item.value }}</div>
         </el-option>
       </el-select>
-      <el-input v-model="cont"></el-input>
+      <el-input v-model="content"></el-input>
       <el-button type="primary" @click.native="searchArticle()">搜索</el-button>
     </div>
 
-      <ArticleItemView
-        v-for="item in showArr"
-        :key="item.id"
-        :itemObj="item"
-        @delete="getContent"
-      />
+    <ArticleItemView
+      v-for="item in showArray"
+      :key="item.id"
+      :itemObj="item"
+    />
 
     <div>
       <button class="prior" @click="formerPage()">&lt;上一页</button>
@@ -28,14 +27,28 @@
 import ArticleItemView from "@/components/ArticleItemView";
 import bus from '@/assets/eventBus';
 import axios from "axios";
+
 export default {
-  components: { ArticleItemView },
+  components: {ArticleItemView},
   data() {
     return {
-      listArr: [],
-      showArr: [],
+      //从数据库取出来的数组
+      listArray: [
+        {
+          title: "",
+          keyword: [],
+          abstracted: "",
+          link: "",
+          paper_id: "",
+          publication_year: ""
+        }
+      ],
+      //展示在页面上的数组
+      showArray: [],
+      //showArray从这个数组取值
+      searchArray: [],
       pageNum: 0,
-      pageSize: 5,
+      pageSize: 10,
 
       types: [
         {
@@ -45,92 +58,85 @@ export default {
           value: "关键词",
         },
         {
-          value: "编号",
+          value: "发布时间",
         },
       ],
       value: "论文名",
-      cont: "",
+      content: "",
     };
   },
   methods: {
-    query(){
-      this.$http
-        .post('http://localhost:8081//essay', {
-
-        })
+    query() {
+      this.$axios
+        .get('http://localhost:8083/changepage', {})
         .then(res => {
-          this.listArr=res.data
-          this.showArr=this.listArr.filter((item, index) =>
-            index < (this.pageNum + 1) * this.pageSize &&
-            index >= this.pageSize * this.pageNum)
-
+          this.listArray = res.data
+          this.searchArray = this.listArray
+          this.showArray = this.listArray
+          this.divideList()
         })
         .catch(failResponse => {
         })
     },
     getList() {
-      if (this.cont !== "") {
-        if(this.value==="论文名"){
-          this.showArr = this.listArr.filter((item, index) =>
-            item.title.includes(this.cont));
-        }else if(this.value==="关键词"){
-             // this.listArr = this.listArr.filter((item, index) =>
-             //    item.spArr.indexOf(this.cont));
-        }
+      if (this.content !== "") {
+        if (this.value === "论文名") {
+          this.searchArray = this.listArray.filter((item, index) =>
+            item.title.includes(this.content));
+        } else if (this.value === "关键词") {
+          this.searchArray = this.listArray.filter((item, index) =>
+            item.keyword.indexOf(this.content) > -1);
 
-      }else{
-        this.showArr=this.listArr
+        } else if (this.value === "发布时间") {
+          this.searchArray = this.listArray.filter((item, index) =>
+            item.publication_year === this.content);
+
+        } else {
+          this.searchArray = this.listArray
+        }
       }
-      this.showArr = this.showArr.filter(
+    },
+    divideList() {
+      this.showArray = this.searchArray.filter(
         (item, index) =>
           index < (this.pageNum + 1) * this.pageSize &&
           index >= this.pageSize * this.pageNum
       );
-
     },
-
     searchArticle() {
       this.pageNum = 0;
       this.getList();
+      this.divideList();
     },
     nextPage() {
-      if ((this.pageNum + 1) * this.pageSize > this.showArr.length) {
+      if ((this.pageNum + 1) * this.pageSize > this.searchArray.length) {
         alert("已经到最后一页了!");
       } else {
         this.pageNum++;
-        this.getList();
+        this.divideList();
       }
     },
     formerPage() {
       if (this.pageNum > 0) {
         this.pageNum--;
-        this.getList();
+        this.divideList();
       } else {
         alert("已经在第一页了!");
       }
-    },
-    getContent(){
-
-      this.showArr.splice(this.item.id,1)
     }
-
-
   },
   created() {
     this.query();
   },
   mounted() {
-    this.query();
+    this.getList()
     bus.$on("delete", id => {
-      for(let i=0;i<this.showArr.length;i++){
-        if(this.listArr[i].id===id){
-          this.listArr.splice(i,1)
+      for (let i = 0; i < this.showArray.length; i++) {
+        if (this.showArray[i].paper_id === id) {
+          this.showArray.splice(i, 1)
         }
-
       }
-      this.getList();
     });
-    this.getList();
   }
 };
 </script>
@@ -141,9 +147,11 @@ export default {
   background-color: rgb(214, 234, 234);
   min-height: 1200px;
 }
+
 #srh {
   height: 180px;
-  /deep/.el-select {
+
+  /deep/ .el-select {
     display: inline-block;
     font-size: 20px;
     height: 55px;
@@ -152,11 +160,11 @@ export default {
     margin-left: 680px;
   }
 
-  /deep/.el-input {
+  /deep/ .el-input {
     width: 400px;
     height: 55px;
 
-    /deep/.el-input__inner {
+    /deep/ .el-input__inner {
       background-color: #fff;
       background-image: none;
       border-radius: 4px;
@@ -170,7 +178,8 @@ export default {
       width: 100%;
     }
   }
-  /deep/.el-button--primary {
+
+  /deep/ .el-button--primary {
     color: #fff;
     background-color: #3e4042;
     border-color: #212122;
@@ -179,10 +188,12 @@ export default {
     font-size: 17pt;
   }
 }
+
 .next {
   height: 40px;
   width: 80px;
 }
+
 .prior {
   margin-left: 900px;
   height: 40px;

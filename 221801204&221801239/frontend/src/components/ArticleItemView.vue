@@ -1,31 +1,31 @@
 <template>
   <div class="article">
     <div id="left">
-        <h1 id="title">{{ itemObj.title }}</h1>
+      <h1 id="title">{{ itemObj.title }}</h1>
       <div id="cen">
         关键词:
-<!--        <div-->
-<!--          class="spr"-->
-<!--          style="display: inline"-->
-<!--          v-for="item in itemObj.spArr"-->
-<!--          :key="item"-->
-<!--        >-->
-<!--          {{ item }}-->
-<!--        </div>-->
+        <div
+          class="spr"
+          style="display: inline"
+          v-for="item in itemObj.keyword"
+          :key="item.index"
+        >
+          {{ item }}
+        </div>
       </div>
-      <p class="cont">{{ itemObj.content.substring(0,400) }}...</p>
+      <p class="cont">{{ itemObj.abstracted }}...</p>
       <div id="alink">
         原文链接:<a href="itemObj.link">{{ itemObj.link }}</a>
       </div>
     </div>
-<div id="right">
-  <div class="number">编号:{{ itemObj.id }}</div>
-  <div id="ope">
-    <button class="look" @click="viewArt()">查看</button>
-    <button class="del" @click="delArt()">删除</button>
-  </div>
-  <div id="time">{{ itemObj.time }}</div>
-</div>
+    <div id="right">
+      <div class="number">编号:{{ itemObj.paper_id }}</div>
+      <div id="ope">
+        <button class="look" @click="viewArt()">查看</button>
+        <button class="del" @click="delArt()">删除</button>
+      </div>
+      <div id="time">{{ itemObj.publication_year }}</div>
+    </div>
 
 
   </div>
@@ -33,6 +33,7 @@
 
 <script>
 import bus from '@/assets/eventBus';
+
 export default {
   props: {
     itemObj: {
@@ -46,16 +47,17 @@ export default {
   methods: {
     viewArt() {
       this.$router.replace("/ViewArticle");
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         bus.$emit('sendData', this.itemObj);
       });
     },
-    delArt(){
-      bus.$emit('delete', this.itemObj.id);
-
+    delArt() {
+      this.$nextTick(() => {
+        bus.$emit('delete', this.itemObj.paper_id);
+      });
     }
 
-  },created() {
+  }, created() {
   }
 };
 </script>
@@ -71,26 +73,32 @@ export default {
   background-color: white;
   margin-top: 3px;
   margin-left: 155px;
+
   #left {
     width: 1400px;
     height: 100%;
+
     h1 {
       margin-left: 0.8%;
 
     }
+
     #cen {
       margin-left: 0.8%;
+
       .spr {
-      margin-left: 0.8%;
+        margin-left: 0.8%;
+      }
     }
-    }
+
     .cont {
       margin-left: 0.8%;
       display: inline-block;
       width: 1400px;
-      word-break:break-all;
-      text-indent:2em;
+      word-break: break-all;
+      text-indent: 2em;
     }
+
     #alink {
       display: inline-block;
       height: 15px;
@@ -98,31 +106,36 @@ export default {
       font-size: 11pt;
     }
   }
-  #right{
+
+  #right {
     display: block;
     padding: 0 15px;
+
     .number {
       margin-top: 5px;
       width: 100%;
       font-size: 15pt;
     }
+
     #ope {
       display: flex;
       margin: 50% 0;
 
-      .look{
+      .look {
         height: 40px;
         width: 60px;
         background-color: white;
 
       }
-      .del{
+
+      .del {
         height: 40px;
         width: 60px;
         background-color: white;
 
       }
     }
+
     #time {
       margin: 10px 0;
       font-size: 11pt;
