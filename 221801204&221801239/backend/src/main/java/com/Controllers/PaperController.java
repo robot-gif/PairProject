@@ -11,19 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class PaperController
-{
+public class PaperController {
     @Autowired
     private IPaperService paperService;
 
     @RequestMapping("/getPapers")
-    @CrossOrigin(origins = "*",maxAge = 3600)
+    @CrossOrigin(origins = "*", maxAge = 3600)
     public String getPapers()
     {
-        Paper paper = paperService.getPapers();
-        paper.setKeywordString();
+        List<Paper> paperList = paperService.getPapers();
         Gson gson = new Gson();
-        return gson.toJson(paper);
+        return gson.toJson(paperList);
     }
-
 }

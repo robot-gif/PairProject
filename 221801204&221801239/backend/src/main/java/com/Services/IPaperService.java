@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface IPaperService
 {
-    Paper getPapers();
+    List<Paper> getPapers();
 }

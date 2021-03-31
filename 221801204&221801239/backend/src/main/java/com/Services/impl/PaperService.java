@@ -17,14 +17,19 @@ public class PaperService implements IPaperService
     private PaperMapper mapper;
 
     @Override
-    public Paper getPapers()
+    public List<Paper> getPapers()
     {
-
-        int paperid=4;
-        List<KeywordForPapers> paperKeywords = mapper.getKeyWords(4);//获取该篇文章的关键词列表
-
-        Paper paper = mapper.getPapers(4);
-        paper.setKeywords(paperKeywords);
-        return paper;
+        List<Paper> paperList = new ArrayList<>();
+        List<KeywordForPapers> paperKeywords;
+        Paper paper;
+        for (int i=15000;i<=15003;i++)
+        {
+            paperKeywords = mapper.getKeyWords(i);//获取该篇文章的关键词列表
+            paper = mapper.getPapers(i);
+            paper.setKeywords(paperKeywords);
+            paper.setKeywordString();
+            paperList.add(paper);
+        }
+        return paperList;
     }
 }
