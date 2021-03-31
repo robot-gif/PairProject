@@ -10,4 +10,8 @@
     <select id="getPapers" resultType="Paper">
         select * from xjbs.paper;
     </select>
+
+    <select id="getMeetingInfo" resultType="meetinginfo">
+        select magazine,count(*) as number,publication_year from xjbs.paper group by magazine,publication_year ORDER BY publication_year;
+    </select>
 </mapper>
