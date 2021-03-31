@@ -20,6 +20,10 @@ public class PaperController {
     public String getPapers()
     {
         List<Paper> paperList = paperService.getPapers();
+        for(Paper paper:paperList)
+        {
+            paper.setKeywordsArray();
+        }
         Gson gson = new Gson();
         return gson.toJson(paperList);
     }

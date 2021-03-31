@@ -5,32 +5,35 @@ import org.apache.ibatis.type.Alias;
 @Alias("meetinginfo")
 public class MeetingInfo
 {
-    private int publish_year;
+    private int publication_year;
     private String magazine;
     private int number;
 
-    public MeetingInfo(int publish_year, String magazine, int number)
+    public MeetingInfo(int publication_year, String magazine, int number)
     {
-        this.publish_year = publish_year;
+        this.publication_year = publication_year;
         this.magazine = magazine;
         this.number = number;
+    }
+
+    public MeetingInfo() {
     }
 
     @Override
     public String toString() {
         return "MeetingInfo{" +
-                "publish_year=" + publish_year +
+                "publish_year=" + publication_year +
                 ", magazine='" + magazine + '\'' +
                 ", number=" + number +
                 '}';
     }
 
     public int getPublish_year() {
-        return publish_year;
+        return publication_year;
     }
 
-    public void setPublish_year(int publish_year) {
-        this.publish_year = publish_year;
+    public void setPublish_year(int publication_year) {
+        this.publication_year = publication_year;
     }
 
     public String getMagazine() {

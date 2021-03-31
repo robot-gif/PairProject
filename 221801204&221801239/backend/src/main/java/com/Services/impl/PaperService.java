@@ -2,7 +2,6 @@ package com.Services.impl;
 
 import com.Services.IPaperService;
 import com.mapper.PaperMapper;
-import com.pojo.KeywordForPapers;
 import com.pojo.Paper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
