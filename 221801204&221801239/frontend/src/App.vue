@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-    <NavView />
-     <div class="main"><router-view></router-view></div>
+    <NavView/>
+    <div class="main">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
 import NavView from "@/components/NavView";
+
 export default {
   components: {
     NavView,
@@ -18,8 +21,9 @@ export default {
 * {
   padding: 0;
   margin: 0;
-  font-family: "微软雅黑",serif;
+  font-family: "微软雅黑", serif;
 }
+
 .main {
   height: 100%;
   width: 100%;

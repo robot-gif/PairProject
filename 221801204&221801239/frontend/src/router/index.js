@@ -4,8 +4,8 @@ import LoginView from '@/components/LoginView'
 import RegisterView from '@/components/RegisterView'
 import SearchView from '@/components/SearchView'
 import ViewArticleView from '@/components/ViewArticleView'
-import chartView from '@/components/chartView'
-import wordCloudView from '@/components/wordCloudView'
+import ShowChartView from '@/components/ShowChartView'
+import WordCloudView from '@/components/WordCloudView'
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
@@ -35,10 +35,10 @@ const routes = [
     component: ViewArticleView
   }, {
     path: '/ChartView',
-    component: chartView
+    component: ShowChartView
   },{
     path: '/WordCloudView',
-    component: wordCloudView
+    component: WordCloudView
   }
 
 ]
