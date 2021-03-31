@@ -10,11 +10,11 @@
       <el-button type="primary" @click.native="searchArticle()">搜索</el-button>
     </div>
 
-      <ArticleItemView
-        v-for="item in showArray"
-        :key="item.id"
-        :itemObj="item"
-      />
+    <ArticleItemView
+      v-for="item in showArray"
+      :key="item.id"
+      :itemObj="item"
+    />
 
     <div>
       <button class="prior" @click="formerPage()">&lt;上一页</button>
@@ -27,25 +27,26 @@
 import ArticleItemView from "@/components/ArticleItemView";
 import bus from '@/assets/eventBus';
 import axios from "axios";
+
 export default {
-  components: { ArticleItemView },
+  components: {ArticleItemView},
   data() {
     return {
       //从数据库取出来的数组
       listArray: [
         {
-          title:"",
-          keyword:[],
-          abstracted:"",
-          link:"",
-          paper_id:"",
-          publication_year:""
+          title: "",
+          keyword: [],
+          abstracted: "",
+          link: "",
+          paper_id: "",
+          publication_year: ""
         }
       ],
       //展示在页面上的数组
       showArray: [],
       //showArray从这个数组取值
-      searchArray:[],
+      searchArray: [],
       pageNum: 0,
       pageSize: 10,
 
@@ -65,19 +66,17 @@ export default {
     };
   },
   methods: {
-    query(){
-      // this.$axios
-      //   .get('http://localhost:8083/changepage', {
-      //
-      //   })
-      //   .then(res => {
-      //     this.listArray=res.data
-      //     this.searchArray=this.listArray
-      //     this.showArray=this.listArray
-      //     this.divideList()
-      //   })
-      //   .catch(failResponse => {
-      //   })
+    query() {
+      this.$axios
+        .get('http://localhost:8083/changepage', {})
+        .then(res => {
+          this.listArray = res.data
+          this.searchArray = this.listArray
+          this.showArray = this.listArray
+          this.divideList()
+        })
+        .catch(failResponse => {
+        })
     },
     getList() {
       if (this.content !== "") {
@@ -86,18 +85,18 @@ export default {
             item.title.includes(this.content));
         } else if (this.value === "关键词") {
           this.searchArray = this.listArray.filter((item, index) =>
-            item.keyword.indexOf(this.content)>-1);
+            item.keyword.indexOf(this.content) > -1);
 
-        } else if(this.value === "发布时间"){
+        } else if (this.value === "发布时间") {
           this.searchArray = this.listArray.filter((item, index) =>
-            item.publication_year===this.content);
+            item.publication_year === this.content);
 
-        }else {
+        } else {
           this.searchArray = this.listArray
         }
       }
     },
-    divideList(){
+    divideList() {
       this.showArray = this.searchArray.filter(
         (item, index) =>
           index < (this.pageNum + 1) * this.pageSize &&
@@ -110,7 +109,7 @@ export default {
       this.divideList();
     },
     nextPage() {
-      if ((this.pageNum+1)*this.pageSize>this.searchArray.length) {
+      if ((this.pageNum + 1) * this.pageSize > this.searchArray.length) {
         alert("已经到最后一页了!");
       } else {
         this.pageNum++;
@@ -132,9 +131,9 @@ export default {
   mounted() {
     this.getList()
     bus.$on("delete", id => {
-      for(let i=0;i<this.showArray.length;i++){
-        if(this.showArray[i].paper_id===id){
-          this.showArray.splice(i,1)
+      for (let i = 0; i < this.showArray.length; i++) {
+        if (this.showArray[i].paper_id === id) {
+          this.showArray.splice(i, 1)
         }
       }
     });
@@ -148,9 +147,11 @@ export default {
   background-color: rgb(214, 234, 234);
   min-height: 1200px;
 }
+
 #srh {
   height: 180px;
-  /deep/.el-select {
+
+  /deep/ .el-select {
     display: inline-block;
     font-size: 20px;
     height: 55px;
@@ -159,11 +160,11 @@ export default {
     margin-left: 680px;
   }
 
-  /deep/.el-input {
+  /deep/ .el-input {
     width: 400px;
     height: 55px;
 
-    /deep/.el-input__inner {
+    /deep/ .el-input__inner {
       background-color: #fff;
       background-image: none;
       border-radius: 4px;
@@ -177,7 +178,8 @@ export default {
       width: 100%;
     }
   }
-  /deep/.el-button--primary {
+
+  /deep/ .el-button--primary {
     color: #fff;
     background-color: #3e4042;
     border-color: #212122;
@@ -186,10 +188,12 @@ export default {
     font-size: 17pt;
   }
 }
+
 .next {
   height: 40px;
   width: 80px;
 }
+
 .prior {
   margin-left: 900px;
   height: 40px;

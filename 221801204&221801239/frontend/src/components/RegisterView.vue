@@ -40,7 +40,8 @@
             id="rgb"
             type="primary"
             @click.native="submitForm('ruleForm')"
-            >提交</el-button
+          >提交
+          </el-button
           >
         </el-form-item>
       </el-form>
@@ -49,25 +50,24 @@
 </template>
 
 <script>
-import bus from "@/assets/eventBus";
 
 export default {
   data() {
     const validateUser = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入账号"));
-      }  else if(value.length<6) {
+      } else if (value.length < 6) {
         callback(new Error("账号位数不能小于6位"));
-      }else{
+      } else {
         callback();
       }
     };
     const validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
-      } else if(value.length<6) {
+      } else if (value.length < 6) {
         callback(new Error("密码位数不能小于6位"));
-      }else{
+      } else {
         if (this.ruleForm.checkPass !== "") {
           this.$refs.ruleForm.validateField("checkPass");
         }
@@ -90,9 +90,9 @@ export default {
         checkPass: "",
       },
       rules: {
-        user: [{ validator: validateUser, trigger: "blur" }],
-        pass: [{ validator: validatePass, trigger: "blur" }],
-        checkPass: [{ validator: validatePass2, trigger: "blur" }],
+        user: [{validator: validateUser, trigger: "blur"}],
+        pass: [{validator: validatePass, trigger: "blur"}],
+        checkPass: [{validator: validatePass2, trigger: "blur"}],
       },
     };
   },
@@ -102,18 +102,18 @@ export default {
         if (valid) {
           this.$axios
             .get('http://localhost:8083/register', {
-              params:{
+              params: {
                 username: this.ruleForm.user,
                 password: this.ruleForm.pass
               }
-            },{ headers: { 'Content-Type': 'application/x-www-form-urlencoded format' } })
+            }, {headers: {'Content-Type': 'application/x-www-form-urlencoded format'}})
             .then(res => {
-                if(res.data===1){
-                  this.$message.success("注册成功")
-                  this.$router.replace({path: '/Login'})
-                }else{
-                  this.$message.error("注册失败，用户名已被注册！")
-                }
+              if (res.data === 1) {
+                this.$message.success("注册成功")
+                this.$router.replace({path: '/Login'})
+              } else {
+                this.$message.error("注册失败，用户名已被注册！")
+              }
 
             }).catch(failResponse => {
           })
@@ -128,12 +128,14 @@ export default {
 };
 </script>
 
-<style lang="less" >
-.register{
-  background-color:  rgba(53, 64, 68, 1);
+<style lang="less">
+.register {
+  background-color: rgba(53, 64, 68, 1);
   height: 835px;
-  width: 100%;padding-top: 85px;
+  width: 100%;
+  padding-top: 85px;
 }
+
 .reg {
   height: 592px;
   width: 446px;
@@ -145,6 +147,7 @@ export default {
   #head {
     height: 100px;
     width: 446px;
+
     #bt {
       height: 30px;
       width: 120px;
@@ -157,6 +160,7 @@ export default {
     }
   }
 }
+
 .el-form-item__label {
   text-align: left !important;
   font-weight: bold !important;
@@ -168,14 +172,16 @@ export default {
   line-height: 40px;
   display: block;
 }
+
 .el-form-item__content {
   line-height: 40px;
   margin-left: 40px !important;
   width: 360px;
   font-size: 14px;
 }
+
 .el-button#rgb {
-  display: line;
+  display: inline;
   border: none;
   width: 260px !important;
   font-size: 20px !important;
