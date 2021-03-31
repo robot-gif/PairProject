@@ -7,7 +7,7 @@
         <div
           class="spr"
           style="display: inline"
-          v-for="item in itemObj.keyword"
+          v-for="item in itemObj.keywordsArray"
           :key="item.index"
         >
           {{ item }}

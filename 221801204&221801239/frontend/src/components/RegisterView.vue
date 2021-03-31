@@ -101,7 +101,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios
-            .get('http://localhost:8083/register', {
+            .get('http://localhost:8081/register', {
               params: {
                 username: this.ruleForm.user,
                 password: this.ruleForm.pass

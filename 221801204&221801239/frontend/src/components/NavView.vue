@@ -34,7 +34,6 @@ export default {
         status: 0
       }
 
-
     };
   },
   methods: {
@@ -80,7 +79,6 @@ export default {
   mounted() {
     bus.$on("sendStatus", state => {
       this.state = state;
-      console.log(this.state)
     });
   },
 };

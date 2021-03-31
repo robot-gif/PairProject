@@ -36,7 +36,7 @@ export default {
       listArray: [
         {
           title: "",
-          keyword: [],
+          keywordsArray: [],
           abstracted: "",
           link: "",
           paper_id: "",
@@ -68,8 +68,9 @@ export default {
   methods: {
     query() {
       this.$axios
-        .get('http://localhost:8083/changepage', {})
+        .get('http://localhost:8081/getPapers', {})
         .then(res => {
+
           this.listArray = res.data
           this.searchArray = this.listArray
           this.showArray = this.listArray
@@ -85,7 +86,7 @@ export default {
             item.title.includes(this.content));
         } else if (this.value === "关键词") {
           this.searchArray = this.listArray.filter((item, index) =>
-            item.keyword.indexOf(this.content) > -1);
+            item.keywordsArray.indexOf(this.content) > -1);
 
         } else if (this.value === "发布时间") {
           this.searchArray = this.listArray.filter((item, index) =>
